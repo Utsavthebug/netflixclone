@@ -5,9 +5,8 @@ import serverAuth from "@/lib/serverAuth";
 
 export default async function handler(req:NextApiRequest,res:NextApiResponse) {
     try  {
-
         if(req.method==="POST"){
-        const {currentUser} = await serverAuth(req)
+        const {currentUser} = await serverAuth(req,res)
         const {movieId}  = req.body
 
         const existingMovie = await prismdb.movie.findUnique({
@@ -35,7 +34,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
         }
 
         if(req.method==='DELETE'){
-        const {currentUser} = await serverAuth(req)
+        const {currentUser} = await serverAuth(req,res)
 
         const {movieId} = req.body
             
@@ -63,7 +62,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
         return res.status(200).json(updatedUser)
         }
 
-    return res.status(405).end()
+     return res.status(405).end()
 
         
     } catch (error) {

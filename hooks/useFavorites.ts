@@ -12,7 +12,8 @@ const useFavorites = ()=>{
     return {
         data,
         error,
-        isLoading
+        isLoading,
+        mutate
     }
 }
 
